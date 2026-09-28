@@ -1,0 +1,33 @@
+name: Monthly DART update
+
+on:
+  schedule:
+    - cron: '5 0 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Collect and analyze DART data
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+        run: python src/pipeline.py
+      - name: Commit updated data and dashboard
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data dashboard/data.js
+          git diff --cached --quiet || git commit -m "chore: update Lunit DART financial data"
+          git push
