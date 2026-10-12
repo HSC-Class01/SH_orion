@@ -21,6 +21,10 @@ ALIASES = {
     "controlling_net_income": ["지배기업의 소유주에게 귀속되는 당기순이익", "지배기업 소유주지분", "지배주주순이익"],
     "total_assets": ["자산총계"],
     "current_assets": ["유동자산"],
+    "quick_assets": ["당좌자산"],
+    "receivables": ["매출채권", "매출채권및기타채권", "매출채권 및 기타채권"],
+    "inventory": ["재고자산"],
+    "payables": ["매입채무", "매입채무및기타채무", "매입채무 및 기타채무"],
     "cash": ["현금및현금성자산", "현금 및 현금성자산", "현금성자산"],
     "total_liabilities": ["부채총계"],
     "current_liabilities": ["유동부채"],
@@ -31,6 +35,8 @@ ALIASES = {
     "cff": ["재무활동으로 인한 현금흐름", "재무활동현금흐름"],
     "capex": ["유형자산의 취득", "유형자산 취득", "무형자산의 취득", "무형자산 취득"],
     "interest_expense": ["이자비용", "금융비용", "이자비용(금융비용)"],
+    "tax_expense": ["법인세비용", "법인세비용(수익)"],
+    "eps": ["기본주당이익", "기본주당순이익", "기본주당이익(손실)"],
     "depreciation_amortization": ["감가상각비", "감가상각비 및 무형자산상각비", "유형자산감가상각비", "무형자산상각비"],
 }
 
@@ -74,20 +80,21 @@ def find_corp_code(api_key):
     r.raise_for_status()
     with zipfile.ZipFile(io.BytesIO(r.content)) as z:
         xml = z.read("CORPCODE.xml").decode("utf-8")
-    m = re.search(r"<list>.*?<corp_code>(\d+)</corp_code>.*?<corp_name>루닛</corp_name>.*?<stock_code>328130</stock_code>.*?</list>", xml, re.S)
+    m = re.search(r"<list>.*?<corp_code>(\d+)</corp_code>.*?<corp_name>오리온</corp_name>.*?<stock_code>271560</stock_code>.*?</list>", xml, re.S)
     if not m:
-        m = re.search(r"<corp_code>(\d+)</corp_code>.*?<corp_name>루닛</corp_name>", xml, re.S)
-    if not m: raise RuntimeError("루닛 corp_code를 찾지 못했습니다.")
+        m = re.search(r"<corp_code>(\d+)</corp_code>.*?<corp_name>오리온</corp_name>", xml, re.S)
+    if not m: raise RuntimeError("오리온 corp_code를 찾지 못했습니다.")
     return m.group(1)
 
 def extract_record(data, year, report_key, fs_div):
     rows = data.get("list", [])
     vals = {
         "year": year, "report": report_key, "fs_div": fs_div,
+        "period_type": "3M" if report_key.startswith("quarterly") else ("6M" if report_key == "half_year" else "12M"),
         "filing_no": rows[0].get("rcept_no") if rows else "",
         "currency": rows[0].get("currency") if rows else "KRW",
     }
-    for key, sj in [("revenue","IS"),("cost_of_sales","IS"),("gross_profit","IS"),("operating_income","IS"),("pretax_income","IS"),("net_income","IS"),("controlling_net_income","IS"),("total_assets","BS"),("current_assets","BS"),("cash","BS"),("total_liabilities","BS"),("current_liabilities","BS"),("total_equity","BS"),("borrowings","BS"),("cfo","CF"),("cfi","CF"),("cff","CF"),("capex","CF"),("interest_expense","IS"),("depreciation_amortization","IS")]:
+    for key, sj in [("revenue","IS"),("cost_of_sales","IS"),("gross_profit","IS"),("operating_income","IS"),("pretax_income","IS"),("net_income","IS"),("controlling_net_income","IS"),("total_assets","BS"),("current_assets","BS"),("quick_assets","BS"),("receivables","BS"),("inventory","BS"),("payables","BS"),("cash","BS"),("total_liabilities","BS"),("current_liabilities","BS"),("total_equity","BS"),("borrowings","BS"),("cfo","CF"),("cfi","CF"),("cff","CF"),("capex","CF"),("interest_expense","IS"),("tax_expense","IS"),("eps","IS"),("depreciation_amortization","IS")]:
         vals[key] = pick(rows, key, sj)
     return vals
 
@@ -107,20 +114,45 @@ def annualize_report(record):
     borrow = r.get("borrowings")
     da = r.get("depreciation_amortization")
     ebitda = (op + da) if op is not None and da is not None else None
-    r["gross_margin"] = safe_div(r.get("gross_profit"), revenue)
-    r["operating_margin"] = safe_div(op, revenue)
-    r["net_margin"] = safe_div(ni, revenue)
+    r["gross_margin"] = safe_div(r.get("gross_profit"), revenue, 100)
+    r["operating_margin"] = safe_div(op, revenue, 100)
+    r["net_margin"] = safe_div(ni, revenue, 100)
     r["current_ratio"] = safe_div(cur_a, cur_l, 100)
+    quick_assets = r.get("quick_assets")
+    if quick_assets is None and cur_a is not None and r.get("inventory") is not None:
+        quick_assets = cur_a - r.get("inventory")
+    r["quick_ratio"] = safe_div(quick_assets, cur_l, 100)
     r["debt_ratio"] = safe_div(liab, eq, 100)
+    r["equity_ratio"] = safe_div(eq, assets, 100)
+    r["borrowing_dependency"] = safe_div(r.get("borrowings"), assets, 100)
     r["roa"] = safe_div(ni, assets, 100)
     r["roe"] = safe_div(ni, eq, 100)
+    r["asset_turnover"] = safe_div(revenue, assets)
+    tax_rate = safe_div(r.get("tax_expense"), r.get("pretax_income"))
+    nopat = op * (1 - max(0, min(tax_rate, 0.5))) if op is not None and tax_rate is not None else None
+    invested_capital = None
+    if eq is not None and r.get("borrowings") is not None and cash is not None:
+        invested_capital = eq + r.get("borrowings") - cash
+    r["nopat"] = nopat
+    r["invested_capital"] = invested_capital
+    r["roic"] = safe_div(nopat, invested_capital, 100)
     r["cfo_to_ni"] = safe_div(cfo, ni)
     r["net_debt"] = (borrow - cash) if borrow is not None and cash is not None else None
     r["net_debt_ebitda"] = safe_div(r["net_debt"], ebitda)
     r["interest_coverage"] = safe_div(op, abs(r.get("interest_expense")) if r.get("interest_expense") is not None else None)
     r["ebitda"] = ebitda
     r["fcf"] = (cfo - abs(r.get("capex"))) if cfo is not None and r.get("capex") is not None else None
+    r["dso"] = safe_div(r.get("receivables"), revenue, 365)
+    r["dio"] = safe_div(r.get("inventory"), r.get("cost_of_sales"), 365)
+    r["dpo"] = safe_div(r.get("payables"), r.get("cost_of_sales"), 365)
+    if r.get("dso") is not None and r.get("dio") is not None and r.get("dpo") is not None:
+        r["ccc"] = r["dso"] + r["dio"] - r["dpo"]
+    else:
+        r["ccc"] = None
     return r
+
+def avg(a,b):
+    return (a+b)/2 if a is not None and b is not None else None
 
 def safe_div(a,b,mult=1):
     try:
@@ -166,13 +198,40 @@ def run():
     for r in records:
         dedup[(r["year"],r["report"])] = r
     records=list(dedup.values())
+    for report_key in {r["report"] for r in records}:
+        seq=sorted([r for r in records if r["report"]==report_key and r.get("revenue") is not None], key=lambda x:x["year"])
+        prev=None
+        for r in seq:
+            r["revenue_growth"] = safe_div(r.get("revenue") - prev, prev, 100) if prev not in (None,0) else None
+            prev=r.get("revenue")
+    # For annual ROA/ROE/turnover/ROIC, apply the guide's average-balance principle when prior-year balances exist.
+    annual_seq=sorted([r for r in records if r["report"]=="annual"], key=lambda x:x["year"])
+    prev=None
+    for r in annual_seq:
+        if prev is not None:
+            avg_assets=avg(prev.get("total_assets"), r.get("total_assets"))
+            avg_eq=avg(prev.get("total_equity"), r.get("total_equity"))
+            avg_ic=avg(prev.get("invested_capital"), r.get("invested_capital"))
+            r["roa"]=safe_div(r.get("net_income"), avg_assets, 100)
+            r["roe"]=safe_div(r.get("net_income"), avg_eq, 100)
+            r["asset_turnover"]=safe_div(r.get("revenue"), avg_assets)
+            r["roic"]=safe_div(r.get("nopat"), avg_ic, 100)
+            avg_ar=avg(prev.get("receivables"), r.get("receivables"))
+            avg_inv=avg(prev.get("inventory"), r.get("inventory"))
+            avg_ap=avg(prev.get("payables"), r.get("payables"))
+            r["dso"]=safe_div(avg_ar, r.get("revenue"), 365)
+            r["dio"]=safe_div(avg_inv, r.get("cost_of_sales"), 365)
+            r["dpo"]=safe_div(avg_ap, r.get("cost_of_sales"), 365)
+            if all(r.get(k) is not None for k in ("dso","dio","dpo")):
+                r["ccc"]=r["dso"]+r["dio"]-r["dpo"]
+        prev=r
     annual=[r for r in records if r["report"]=="annual"]
     half=[r for r in records if r["report"]=="half_year"]
     quarter=[r for r in records if r["report"] in ("quarterly_q1","quarterly_q3")]
-    ratios=[{k:v for k,v in r.items() if k in {"year","report","gross_margin","operating_margin","net_margin","current_ratio","debt_ratio","roa","roe","cfo_to_ni","net_debt","net_debt_ebitda","interest_coverage","ebitda","fcf"}} for r in records]
+    ratios=[{k:v for k,v in r.items() if k in {"year","report","revenue_growth","gross_margin","operating_margin","net_margin","current_ratio","quick_ratio","debt_ratio","equity_ratio","borrowing_dependency","asset_turnover","roa","roe","roic","dso","dio","dpo","ccc","cfo_to_ni","net_debt","net_debt_ebitda","interest_coverage","ebitda","fcf","eps"}} for r in records]
     write_csv(PROCESSED/"annual.csv", annual); write_csv(PROCESSED/"half_year.csv", half); write_csv(PROCESSED/"quarterly.csv", quarter); write_csv(PROCESSED/"ratios.csv", ratios)
     (PROCESSED/"status.json").write_text(json.dumps({"corp_code":corp_code,"generated_at":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),"statuses":statuses},ensure_ascii=False,indent=2),encoding="utf-8")
-    payload={"corp_code":corp_code,"generated_at":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),"annual":annual,"half_year":half,"quarterly":quarter,"ratios":ratios,"peers":[{"name":"뷰노","ticker":"338220","focus":"의료영상·생체신호 AI"},{"name":"제이엘케이","ticker":"322510","focus":"뇌졸중 중심 의료영상 AI"},{"name":"딥노이드","ticker":"315640","focus":"의료영상 AI·플랫폼"},{"name":"코어라인소프트","ticker":"384470","focus":"CT 영상 의료 AI"},{"name":"뉴로핏","ticker":"380550","focus":"뇌 영상 분석·치료 보조 AI"}]}
+    payload={"corp_code":corp_code,"generated_at":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),"annual":annual,"half_year":half,"quarterly":quarter,"ratios":ratios,"peers":[{"name":"롯데웰푸드","ticker":"280360","focus":"제과·빙과·식품"},{"name":"농심","ticker":"004370","focus":"라면·스낵·식품"},{"name":"삼양식품","ticker":"003230","focus":"라면·가공식품"},{"name":"오뚜기","ticker":"007310","focus":"가공식품·소스"},{"name":"해태제과식품","ticker":"101530","focus":"제과·스낵"}]}
     DASH.parent.mkdir(parents=True, exist_ok=True)
     DASH.write_text("window.DASHBOARD_DATA = " + json.dumps(payload,ensure_ascii=False,separators=(",",":")) + ";",encoding="utf-8")
     print(f"Collected {len(records)} report datasets for corp_code={corp_code}")
