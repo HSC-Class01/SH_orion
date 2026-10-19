@@ -83,13 +83,13 @@ def find_corp_code(api_key):
 
     # Search only records containing the exact company name; avoid scanning all records
     # or accidentally pairing another company's corp_code with Orion's stock code.
-    for name_match in re.finditer(r"<corp_name>\\s*오리온\\s*</corp_name>", xml):
+    for name_match in re.finditer(r"<corp_name>\s*오리온\s*</corp_name>", xml):
         record_start = xml.rfind("<list>", 0, name_match.start())
         record_end = xml.find("</list>", name_match.end())
         if record_start < 0 or record_end < 0:
             continue
         record = xml[record_start:record_end + len("</list>")]
-        code_match = re.search(r"<corp_code>(\\d+)</corp_code>", record)
+        code_match = re.search(r"<corp_code>(\d+)</corp_code>", record)
         stock_match = re.search(r"<stock_code>(.*?)</stock_code>", record, re.S)
         if code_match and stock_match and stock_match.group(1).strip() == "271560":
             return code_match.group(1)
