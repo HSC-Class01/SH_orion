@@ -27,15 +27,15 @@ OpenDART에서 오리온(주식코드 271560)의 사업보고서·반기보고�
 
 ## 설치 및 GitHub 설정
 1. ZIP을 내려받아 저장소 루트에 압축을 풉니다. 기존 파일과 겹치면 README, `src`, `dashboard`, `requirements.txt`, `SETUP_GITHUB_ACTIONS.md`를 확인해 병합하세요.
-2. ZIP에서는 숨김 경로 문제를 피하기 위해 워크플로 파일을 `github_workflows/`에 넣었습니다. GitHub에 업로드한 뒤 폴더명을 **`.github/workflows/`** 로 옮기고 두 YAML 파일을 그 안에 둡니다. GitHub Actions가 인식하려면 실제 경로가 반드시 `.github/workflows/`여야 합니다.
+2. GitHub Actions 워크플로는 저장소의 **`.github/workflows/deploy-pages.yml`** 및 **`.github/workflows/monthly_update.yml`** 에 등록되어 있습니다. `github_workflows/` 폴더는 이전 패키지 호환용이며, Actions가 실제로 실행하는 경로가 아닙니다.
 3. 저장소의 **Settings → Secrets and variables → Actions → New repository secret**에서 이름을 `DART_API_KEY`, 값에 OpenDART 인증키를 입력합니다. 코드나 README에 API 키를 직접 입력하거나 커밋하지 마세요.
 4. **Settings → Pages → Build and deployment → Source: GitHub Actions**로 설정합니다. `Deploy Dashboard to GitHub Pages` 워크플로를 실행합니다.
 5. 저장소 첫 화면의 **About → 톱니바퀴(Edit repository details) → Website**에 `https://hsc-class01.github.io/SH_orion/`을 입력하고 저장합니다.
 6. README 상단 배지는 Shields.io로 생성했습니다. 첨부한 별도 배지 이미지 파일은 이번 대화의 파일 목록에서 확인되지 않아, 클릭 가능한 대체 배지를 사용했습니다.
 
 ## 워크플로 검증
-- `github_workflows/monthly_update.yml`: 매월 1일 자동 수집·분석 후 CSV와 대시보드 데이터를 커밋합니다.
-- `github_workflows/deploy-pages.yml`: `dashboard/`를 GitHub Pages로 배포합니다.
+- `.github/workflows/monthly_update.yml`: 매월 1일 자동 수집·분석 후 CSV와 대시보드 데이터를 커밋하고 같은 실행에서 GitHub Pages에 배포합니다.
+- `.github/workflows/deploy-pages.yml`: 대시보드 파일 변경 시 `dashboard/`를 GitHub Pages로 배포합니다.
 - YAML 문법, Python 컴파일, JavaScript 구문을 로컬에서 확인한 후 ZIP에 포함하세요. GitHub Actions 실행 성공 여부는 저장소에 파일을 올리고 실제 실행한 뒤 확인할 수 있습니다.
 
 ## 국내 Peer Firms (참고 비교군)
