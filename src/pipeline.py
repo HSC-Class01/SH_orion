@@ -81,21 +81,18 @@ def find_corp_code(api_key):
     with zipfile.ZipFile(io.BytesIO(r.content)) as z:
         xml = z.read("CORPCODE.xml").decode("utf-8")
 
-    # Match each <list> record independently so corp_code cannot leak across companies.
-    records = re.findall(r"<list>(.*?)</list>", xml, re.S)
-    for record in records:
-        name = re.search(r"<corp_name>(.*?)</corp_name>", record, re.S)
-        stock = re.search(r"<stock_code>(.*?)</stock_code>", record, re.S)
-        code = re.search(r"<corp_code>(\d+)</corp_code>", record, re.S)
-        if name and stock and code and name.group(1).strip() == "오리온" and stock.group(1).strip() == "271560":
-            return code.group(1)
-
-    # Fallback remains confined to a single record and exact company name.
-    for record in records:
-        name = re.search(r"<corp_name>(.*?)</corp_name>", record, re.S)
-        code = re.search(r"<corp_code>(\d+)</corp_code>", record, re.S)
-        if name and code and name.group(1).strip() == "오리온":
-            return code.group(1)
+    # Search only records containing the exact company name; avoid scanning all records
+    # or accidentally pairing another company's corp_code with Orion's stock code.
+    for name_match in re.finditer(r"<corp_name>\\s*오리온\\s*</corp_name>", xml):
+        record_start = xml.rfind("<list>", 0, name_match.start())
+        record_end = xml.find("</list>", name_match.end())
+        if record_start < 0 or record_end < 0:
+            continue
+        record = xml[record_start:record_end + len("</list>")]
+        code_match = re.search(r"<corp_code>(\\d+)</corp_code>", record)
+        stock_match = re.search(r"<stock_code>(.*?)</stock_code>", record, re.S)
+        if code_match and stock_match and stock_match.group(1).strip() == "271560":
+            return code_match.group(1)
 
     raise RuntimeError("오리온(종목코드 271560)의 corp_code를 찾지 못했습니다.")
 
