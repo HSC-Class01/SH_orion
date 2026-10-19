@@ -86,14 +86,14 @@ def find_corp_code(api_key):
     for record in records:
         name = re.search(r"<corp_name>(.*?)</corp_name>", record, re.S)
         stock = re.search(r"<stock_code>(.*?)</stock_code>", record, re.S)
-        code = re.search(r"<corp_code>(\\d+)</corp_code>", record, re.S)
+        code = re.search(r"<corp_code>(\d+)</corp_code>", record, re.S)
         if name and stock and code and name.group(1).strip() == "오리온" and stock.group(1).strip() == "271560":
             return code.group(1)
 
     # Fallback remains confined to a single record and exact company name.
     for record in records:
         name = re.search(r"<corp_name>(.*?)</corp_name>", record, re.S)
-        code = re.search(r"<corp_code>(\\d+)</corp_code>", record, re.S)
+        code = re.search(r"<corp_code>(\d+)</corp_code>", record, re.S)
         if name and code and name.group(1).strip() == "오리온":
             return code.group(1)
 
