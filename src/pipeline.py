@@ -220,18 +220,54 @@ def run():
                 continue
             for fs_div in ("CFS", "OFS"):
                 try:
-                    data = request_json({"crtfc_key":api_key,"corp_code":corp_code,"bsns_year":str(year),"reprt_code":report_code,"fs_div":fs_div})
-                    rawdir=RAW/str(year); rawdir.mkdir(parents=True, exist_ok=True)
-                    (rawdir/f"{report_code}_{fs_div}.json").write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+                    rawdir = RAW / str(year)
+                    rawfile = rawdir / f"{report_code}_{fs_div}.json"
+
+                    # Reuse previously archived DART responses when available. This keeps
+                    # routine parsing fixes fast and avoids unnecessary API calls; missing
+                    # or unsuccessful cache entries are refreshed from OpenDART.
+                    data = None
+                    if rawfile.is_file():
+                        try:
+                            cached = json.loads(rawfile.read_text(encoding="utf-8"))
+                            if cached.get("status") == "000" and isinstance(cached.get("list"), list):
+                                data = cached
+                        except (OSError, json.JSONDecodeError):
+                            data = None
+
+                    if data is None:
+                        data = request_json({
+                            "crtfc_key": api_key,
+                            "corp_code": corp_code,
+                            "bsns_year": str(year),
+                            "reprt_code": report_code,
+                            "fs_div": fs_div
+                        })
+
+                    rawdir.mkdir(parents=True, exist_ok=True)
+                    rawfile.write_text(
+                        json.dumps(data, ensure_ascii=False, indent=2),
+                        encoding="utf-8"
+                    )
+
                     if data.get("list"):
-                        rec=extract_record(data, year, report_key, fs_div)
+                        rec = extract_record(data, year, report_key, fs_div)
                         records.append(annualize_report(rec))
-                        statuses.append({"year":year,"report":report_key,"fs_div":fs_div,"status":"ok","filing_no":rec.get("filing_no","")})
+                        statuses.append({
+                            "year": year, "report": report_key, "fs_div": fs_div,
+                            "status": "ok", "filing_no": rec.get("filing_no", "")
+                        })
                         break
                     else:
-                        statuses.append({"year":year,"report":report_key,"fs_div":fs_div,"status":"no_data","reason":data.get("message","")})
+                        statuses.append({
+                            "year": year, "report": report_key, "fs_div": fs_div,
+                            "status": "no_data", "reason": data.get("message", "")
+                        })
                 except Exception as e:
-                    statuses.append({"year":year,"report":report_key,"fs_div":fs_div,"status":"error","reason":str(e)})
+                    statuses.append({
+                        "year": year, "report": report_key, "fs_div": fs_div,
+                        "status": "error", "reason": str(e)
+                    })
     # Keep CFS preferentially, otherwise OFS.
     dedup={}
     for r in records:
