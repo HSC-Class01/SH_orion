@@ -1,238 +1,174 @@
 {
   "corp_code": "01238169",
-  "generated_at": "2026-10-19T00:28:00Z",
+  "generated_at": "2026-10-19T00:47:56Z",
   "statuses": [
     {
       "year": 2010,
       "report": "annual",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2010,
       "report": "half_year",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2010,
       "report": "quarterly_q1",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2010,
       "report": "quarterly_q3",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2011,
       "report": "annual",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2011,
       "report": "half_year",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2011,
       "report": "quarterly_q1",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2011,
       "report": "quarterly_q3",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2012,
       "report": "annual",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2012,
       "report": "half_year",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2012,
       "report": "quarterly_q1",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2012,
       "report": "quarterly_q3",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2013,
       "report": "annual",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2013,
       "report": "half_year",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2013,
       "report": "quarterly_q1",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2013,
       "report": "quarterly_q3",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2014,
       "report": "annual",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2014,
       "report": "half_year",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2014,
       "report": "quarterly_q1",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2014,
       "report": "quarterly_q3",
       "status": "unavailable",
-      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2015,
       "report": "annual",
-      "fs_div": "CFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
-    },
-    {
-      "year": 2015,
-      "report": "annual",
-      "fs_div": "OFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
+      "status": "unavailable",
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2015,
       "report": "half_year",
-      "fs_div": "CFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
-    },
-    {
-      "year": 2015,
-      "report": "half_year",
-      "fs_div": "OFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
+      "status": "unavailable",
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2015,
       "report": "quarterly_q1",
-      "fs_div": "CFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
-    },
-    {
-      "year": 2015,
-      "report": "quarterly_q1",
-      "fs_div": "OFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
+      "status": "unavailable",
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2015,
       "report": "quarterly_q3",
-      "fs_div": "CFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
-    },
-    {
-      "year": 2015,
-      "report": "quarterly_q3",
-      "fs_div": "OFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
+      "status": "unavailable",
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2016,
       "report": "annual",
-      "fs_div": "CFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
-    },
-    {
-      "year": 2016,
-      "report": "annual",
-      "fs_div": "OFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
+      "status": "unavailable",
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2016,
       "report": "half_year",
-      "fs_div": "CFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
-    },
-    {
-      "year": 2016,
-      "report": "half_year",
-      "fs_div": "OFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
+      "status": "unavailable",
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2016,
       "report": "quarterly_q1",
-      "fs_div": "CFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
-    },
-    {
-      "year": 2016,
-      "report": "quarterly_q1",
-      "fs_div": "OFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
+      "status": "unavailable",
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2016,
       "report": "quarterly_q3",
-      "fs_div": "CFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
-    },
-    {
-      "year": 2016,
-      "report": "quarterly_q3",
-      "fs_div": "OFS",
-      "status": "error",
-      "reason": "DART 013: 조회된 데이타가 없습니다."
+      "status": "unavailable",
+      "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
     },
     {
       "year": 2017,
