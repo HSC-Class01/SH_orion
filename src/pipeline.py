@@ -54,7 +54,9 @@ def pick(rows, key, sj=None, prefer_controlling=False):
     aliases = [normalize_name(x) for x in ALIASES.get(key, [])]
     candidates = []
     for r in rows:
-        if sj and r.get("sj_div") != sj: continue
+        if sj:
+            allowed_sj = set(sj) if isinstance(sj, (list, tuple, set)) else {sj}
+            if r.get("sj_div") not in allowed_sj: continue
         nm = normalize_name(r.get("account_nm"))
         if any(a == nm or a in nm for a in aliases):
             val = clean_num(r.get("thstrm_amount"))
@@ -104,7 +106,34 @@ def extract_record(data, year, report_key, fs_div):
         "filing_no": rows[0].get("rcept_no") if rows else "",
         "currency": rows[0].get("currency") if rows else "KRW",
     }
-    for key, sj in [("revenue","IS"),("cost_of_sales","IS"),("gross_profit","IS"),("operating_income","IS"),("pretax_income","IS"),("net_income","IS"),("controlling_net_income","IS"),("total_assets","BS"),("current_assets","BS"),("quick_assets","BS"),("receivables","BS"),("inventory","BS"),("payables","BS"),("cash","BS"),("total_liabilities","BS"),("current_liabilities","BS"),("total_equity","BS"),("borrowings","BS"),("cfo","CF"),("cfi","CF"),("cff","CF"),("capex","CF"),("interest_expense","IS"),("tax_expense","IS"),("eps","IS"),("depreciation_amortization","IS")]:
+    for key, sj in [
+        ("revenue", ("IS", "CIS")),
+        ("cost_of_sales", ("IS", "CIS")),
+        ("gross_profit", ("IS", "CIS")),
+        ("operating_income", ("IS", "CIS")),
+        ("pretax_income", ("IS", "CIS")),
+        ("net_income", ("IS", "CIS")),
+        ("controlling_net_income", ("IS", "CIS")),
+        ("total_assets", "BS"),
+        ("current_assets", "BS"),
+        ("quick_assets", "BS"),
+        ("receivables", "BS"),
+        ("inventory", "BS"),
+        ("payables", "BS"),
+        ("cash", "BS"),
+        ("total_liabilities", "BS"),
+        ("current_liabilities", "BS"),
+        ("total_equity", "BS"),
+        ("borrowings", "BS"),
+        ("cfo", "CF"),
+        ("cfi", "CF"),
+        ("cff", "CF"),
+        ("capex", "CF"),
+        ("interest_expense", ("IS", "CIS")),
+        ("tax_expense", ("IS", "CIS")),
+        ("eps", ("IS", "CIS")),
+        ("depreciation_amortization", ("IS", "CIS")),
+    ]:
         vals[key] = pick(rows, key, sj)
     return vals
 
@@ -208,6 +237,20 @@ def run():
     for r in records:
         dedup[(r["year"],r["report"])] = r
     records=list(dedup.values())
+
+    # Fail the refresh instead of publishing a dashboard with silently empty income fields.
+    annual_records = [r for r in records if r.get("report") == "annual"]
+    if annual_records and not any(r.get("revenue") is not None for r in annual_records):
+        raise RuntimeError(
+            "Data-quality check failed: annual revenue is missing for every year. "
+            "Check DART statement divisions (IS/CIS) and account-name aliases."
+        )
+    if annual_records and not any(r.get("operating_income") is not None for r in annual_records):
+        raise RuntimeError(
+            "Data-quality check failed: operating income is missing for every year. "
+            "Check DART statement divisions (IS/CIS) and account-name aliases."
+        )
+
     for report_key in {r["report"] for r in records}:
         seq=sorted([r for r in records if r["report"]==report_key and r.get("revenue") is not None], key=lambda x:x["year"])
         prev=None
