@@ -1,6 +1,12 @@
 name: Monthly DART update
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'requirements.txt'
+      - '.github/workflows/monthly_update.yml'
   schedule:
     - cron: '5 0 1 * *'
   workflow_dispatch:
