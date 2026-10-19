@@ -80,11 +80,24 @@ def find_corp_code(api_key):
     r.raise_for_status()
     with zipfile.ZipFile(io.BytesIO(r.content)) as z:
         xml = z.read("CORPCODE.xml").decode("utf-8")
-    m = re.search(r"<list>.*?<corp_code>(\d+)</corp_code>.*?<corp_name>오리온</corp_name>.*?<stock_code>271560</stock_code>.*?</list>", xml, re.S)
-    if not m:
-        m = re.search(r"<corp_code>(\d+)</corp_code>.*?<corp_name>오리온</corp_name>", xml, re.S)
-    if not m: raise RuntimeError("오리온 corp_code를 찾지 못했습니다.")
-    return m.group(1)
+
+    # Match each <list> record independently so corp_code cannot leak across companies.
+    records = re.findall(r"<list>(.*?)</list>", xml, re.S)
+    for record in records:
+        name = re.search(r"<corp_name>(.*?)</corp_name>", record, re.S)
+        stock = re.search(r"<stock_code>(.*?)</stock_code>", record, re.S)
+        code = re.search(r"<corp_code>(\\d+)</corp_code>", record, re.S)
+        if name and stock and code and name.group(1).strip() == "오리온" and stock.group(1).strip() == "271560":
+            return code.group(1)
+
+    # Fallback remains confined to a single record and exact company name.
+    for record in records:
+        name = re.search(r"<corp_name>(.*?)</corp_name>", record, re.S)
+        code = re.search(r"<corp_code>(\\d+)</corp_code>", record, re.S)
+        if name and code and name.group(1).strip() == "오리온":
+            return code.group(1)
+
+    raise RuntimeError("오리온(종목코드 271560)의 corp_code를 찾지 못했습니다.")
 
 def extract_record(data, year, report_key, fs_div):
     rows = data.get("list", [])
