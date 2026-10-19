@@ -215,8 +215,13 @@ def run():
     statuses=[]; records=[]
     for year in range(START_YEAR, time.localtime().tm_year + 1):
         for report_key, report_code in REPORTS.items():
-            if year < 2015:
-                statuses.append({"year":year,"report":report_key,"status":"unavailable","reason":"OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"})
+            if year < 2017:
+                statuses.append({
+                    "year": year,
+                    "report": report_key,
+                    "status": "unavailable",
+                    "reason": "Orion was spun off in 2017; pre-2017 filings are excluded to avoid mixing predecessor-company financials into the current-company time series."
+                })
                 continue
             for fs_div in ("CFS", "OFS"):
                 try:
