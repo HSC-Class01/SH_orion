@@ -1,0 +1,539 @@
+{
+  "corp_code": "01238169",
+  "generated_at": "2026-10-19T00:28:00Z",
+  "statuses": [
+    {
+      "year": 2010,
+      "report": "annual",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2010,
+      "report": "half_year",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2010,
+      "report": "quarterly_q1",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2010,
+      "report": "quarterly_q3",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2011,
+      "report": "annual",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2011,
+      "report": "half_year",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2011,
+      "report": "quarterly_q1",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2011,
+      "report": "quarterly_q3",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2012,
+      "report": "annual",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2012,
+      "report": "half_year",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2012,
+      "report": "quarterly_q1",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2012,
+      "report": "quarterly_q3",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2013,
+      "report": "annual",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2013,
+      "report": "half_year",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2013,
+      "report": "quarterly_q1",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2013,
+      "report": "quarterly_q3",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2014,
+      "report": "annual",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2014,
+      "report": "half_year",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2014,
+      "report": "quarterly_q1",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2014,
+      "report": "quarterly_q3",
+      "status": "unavailable",
+      "reason": "OpenDART fnlttSinglAcntAll provides financial data from 2015 onward"
+    },
+    {
+      "year": 2015,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2015,
+      "report": "annual",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2015,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2015,
+      "report": "half_year",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2015,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2015,
+      "report": "quarterly_q1",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2015,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2015,
+      "report": "quarterly_q3",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2016,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2016,
+      "report": "annual",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2016,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2016,
+      "report": "half_year",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2016,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2016,
+      "report": "quarterly_q1",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2016,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2016,
+      "report": "quarterly_q3",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2017,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20180402002024"
+    },
+    {
+      "year": 2017,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20170814001278"
+    },
+    {
+      "year": 2017,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2017,
+      "report": "quarterly_q1",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2017,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20171114001288"
+    },
+    {
+      "year": 2018,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20190612000150"
+    },
+    {
+      "year": 2018,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20180814001196"
+    },
+    {
+      "year": 2018,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20180515000742"
+    },
+    {
+      "year": 2018,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20181114001136"
+    },
+    {
+      "year": 2019,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20200330002921"
+    },
+    {
+      "year": 2019,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20190814002481"
+    },
+    {
+      "year": 2019,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20190515002248"
+    },
+    {
+      "year": 2019,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20191114002179"
+    },
+    {
+      "year": 2020,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20210310001175"
+    },
+    {
+      "year": 2020,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20200814000459"
+    },
+    {
+      "year": 2020,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20200515001132"
+    },
+    {
+      "year": 2020,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20201116000759"
+    },
+    {
+      "year": 2021,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20220323000300"
+    },
+    {
+      "year": 2021,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20210817001596"
+    },
+    {
+      "year": 2021,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20210517000934"
+    },
+    {
+      "year": 2021,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20211115001837"
+    },
+    {
+      "year": 2022,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20230315001259"
+    },
+    {
+      "year": 2022,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20220816000818"
+    },
+    {
+      "year": 2022,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20220516001274"
+    },
+    {
+      "year": 2022,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20221114000085"
+    },
+    {
+      "year": 2023,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20240313000527"
+    },
+    {
+      "year": 2023,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20230814000594"
+    },
+    {
+      "year": 2023,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20230515000420"
+    },
+    {
+      "year": 2023,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20231114000580"
+    },
+    {
+      "year": 2024,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20250808000624"
+    },
+    {
+      "year": 2024,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20240814001055"
+    },
+    {
+      "year": 2024,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20240516000155"
+    },
+    {
+      "year": 2024,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20241114000786"
+    },
+    {
+      "year": 2025,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20260318001320"
+    },
+    {
+      "year": 2025,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20250814001923"
+    },
+    {
+      "year": 2025,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20250515000767"
+    },
+    {
+      "year": 2025,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20251113000368"
+    },
+    {
+      "year": 2026,
+      "report": "annual",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2026,
+      "report": "annual",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2026,
+      "report": "half_year",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20260818000305"
+    },
+    {
+      "year": 2026,
+      "report": "quarterly_q1",
+      "fs_div": "CFS",
+      "status": "ok",
+      "filing_no": "20260515000512"
+    },
+    {
+      "year": 2026,
+      "report": "quarterly_q3",
+      "fs_div": "CFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    },
+    {
+      "year": 2026,
+      "report": "quarterly_q3",
+      "fs_div": "OFS",
+      "status": "error",
+      "reason": "DART 013: 조회된 데이타가 없습니다."
+    }
+  ]
+}
